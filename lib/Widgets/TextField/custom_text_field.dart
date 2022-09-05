@@ -48,7 +48,7 @@ class CustomTextField extends StatelessWidget {
             height: height ?? 90,
             width: width != null
                 ? double?.parse(width.toString())
-                : MediaQuery.of(context).size.width,
+                : 500,
             child: TextFormField(
               controller: controller,
               onSaved: onSaved,

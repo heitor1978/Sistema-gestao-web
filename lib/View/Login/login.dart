@@ -59,25 +59,22 @@ class _LoginState extends State<Login> {
             child: ListView(
               children: [
                 Container(
-                  padding: const EdgeInsets.fromLTRB(0, 210, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
                   decoration: const BoxDecoration(
                     color: primaryColor,
-                    borderRadius: BorderRadius.only(
+                    /*borderRadius: BorderRadius.only(
                         // FUNÇÃO DE COLOCAR BORDA NA LOGO DA FOTO
                         bottomLeft: Radius.circular(20),
                         bottomRight: Radius.circular(20)),
+                    ),*/
                   ),
-                  /*child: Image.asset(
-                    'assets/images/chiquinho-logo.png',
-                    height: 250,
-                  ),*/
                 ),
                 const SizedBox(
                   height:
                       150, // precisa resolver está questão ////////////////////////////////////////////////
                 ),
                 CustomTextField(
-                  labelText: "Email",
+                  labelText: "E-mail",
                   placeholder: "colaborador@email.com",
                   inputType: TextInputType.emailAddress,
                   onSaved: (value) => email = value,
@@ -112,8 +109,8 @@ class _LoginState extends State<Login> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height / 5,
-                width: 20,
+                height: 30,
+                width: 30,
               ),
               Container(
                 alignment: Alignment.center,
@@ -131,10 +128,10 @@ class _LoginState extends State<Login> {
                     ),
                   ],
                 ),
-                child: Image.asset(
+                /*child: Image.asset(
                   'assets/images/chiquinho-logo.png',
                   height: 250,
-                ),
+                ),*/
               ),
             ],
           ),

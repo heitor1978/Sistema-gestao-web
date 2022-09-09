@@ -20,7 +20,7 @@ class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
           flexibleSpace: Center(
             child: Container(
               height: MediaQuery.of(context).size.height,
-              margin: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -48,7 +48,7 @@ class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
           leading: Builder(
             builder: (BuildContext context) {
               return Container(
-                margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                 child: IconButton(
                   icon: const Icon(
                     Icons.menu,
@@ -77,10 +77,10 @@ class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
         ),
         decoration: const BoxDecoration(
           color: primaryColor,
-          borderRadius: BorderRadius.only(
+          /*borderRadius: BorderRadius.only(
             bottomLeft: Radius.elliptical(500, 40),
             bottomRight: Radius.elliptical(500, 40),
-          ),
+          ),*/
         ),
       ),
       preferredSize: const Size.fromHeight(80),
@@ -88,5 +88,5 @@ class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(87);
+  Size get preferredSize => const Size.fromHeight(60);
 }

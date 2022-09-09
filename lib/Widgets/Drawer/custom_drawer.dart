@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:gestao_web/Services/AuthService/auth_service.dart';
+import 'package:gestao_web/View/CollaboratorRegistration/collaborator_registration.dart';
 import 'package:gestao_web/View/export_all_view.dart';
 import 'package:gestao_web/theme/theme.dart';
 
@@ -109,7 +110,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 ),
                 ListTile(
                   title: const Text(
-                    "Conta",
+                    "Cadastro de Funcionario",
                     style: TextStyle(
                       color: Color.fromARGB(255, 0, 0, 0),
                     ),
@@ -119,11 +120,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     color: Color.fromARGB(255, 0, 0, 0),
                   ),
                   onTap: () {
-                    /*Navigator.of(context).push(
+                    Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const UserAccount(),
+                        builder: (context) => const CollaboratorRegistration(),
                       ),
-                    );*/
+                    );
                   },
                 ),
                 ListTile(

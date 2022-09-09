@@ -36,17 +36,6 @@ class _HomeState extends State<Home> {
           });
         },
         controller: _pageController,
-        /*children: <Widget>[
-          ProductPage(
-            category: "Açai",
-          ),
-          ProductPage(
-            category: "Salgado",
-          ),
-          ProductPage(
-            category: "Bebida",
-          ),
-        ],*/
       ),
     );
   }

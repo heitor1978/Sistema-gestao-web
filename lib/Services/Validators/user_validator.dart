@@ -32,4 +32,22 @@ class UserValidator {
     return null;
   }
 
+  static String? validarConfirmarSenha(String confirmacaoSenha, String senha) {
+    if (confirmacaoSenha.isEmpty) return 'Senha é obrigatória';
+    if (confirmacaoSenha != senha) return 'As senhas estão diferentes';
+
+    return null;
+  }
+
+  static String? validarCPF(String cpf) {
+    Pattern pattern =
+        '([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})';
+
+    RegExp regex = RegExp(pattern.toString());
+
+    if (cpf.isEmpty) return 'CPF obrigatório';
+    if (!regex.hasMatch(cpf)) return 'CPF inválido';
+
+    return null;
+  }
 }

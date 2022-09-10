@@ -6,3 +6,5 @@ export 'package:gestao_web/Widgets/TextField/custom_text_field.dart';
 export 'package:gestao_web/Widgets/AppBar/custom_appbar.dart';
 // Drawer
 export 'package:gestao_web/Widgets/Drawer/custom_drawer.dart';
+// Dropdown
+export 'package:gestao_web/Widgets/Dropdown/custom_dropdown.dart';

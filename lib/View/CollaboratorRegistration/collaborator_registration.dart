@@ -5,8 +5,8 @@ import 'package:gestao_web/Models/collaborator_model.dart';
 import 'package:gestao_web/Services/AuthService/auth_service.dart';
 import 'package:gestao_web/Services/ControllerService/collaborator_controller.dart';
 import 'package:gestao_web/Services/Validators/user_validator.dart';
+import 'package:gestao_web/Widgets/export_all_widget.dart';
 import 'package:gestao_web/theme/theme.dart';
-import 'package:gestao_web/widgets/export_all_widget.dart';
 
 import 'package:brasil_fields/brasil_fields.dart';
 
@@ -14,7 +14,8 @@ class CollaboratorRegistration extends StatefulWidget {
   const CollaboratorRegistration({Key? key}) : super(key: key);
 
   @override
-  State<CollaboratorRegistration> createState() => _CollaboratorRegistrationState();
+  State<CollaboratorRegistration> createState() =>
+      _CollaboratorRegistrationState();
 }
 
 class _CollaboratorRegistrationState extends State<CollaboratorRegistration> {
@@ -25,6 +26,9 @@ class _CollaboratorRegistrationState extends State<CollaboratorRegistration> {
   AuthService auth = AuthService();
 
   bool isLoading = false;
+  bool admin = false;
+
+  String? dropdownJobRole;
 
   void save(BuildContext context) async {
     if (formKey.currentState!.validate()) {
@@ -32,12 +36,15 @@ class _CollaboratorRegistrationState extends State<CollaboratorRegistration> {
 
       formKey.currentState!.save();
       try {
+        if(dropdownJobRole == "Administrativo"){
+          admin = true;
+        }
         CollaboratorModel model = CollaboratorModel(
           nome: controller.name!.text.trim(),
           uid: null,
           telefone: controller.cellphone!.text,
           cpf: controller.cpf!.text,
-          admin: false,
+          admin: admin,
         );
 
         await auth.register(
@@ -62,14 +69,16 @@ class _CollaboratorRegistrationState extends State<CollaboratorRegistration> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
-      /*appBar: const CustomAppBar(
-        title: "Cadastro",
-      ),*/
+      drawer: const CustomDrawer(),
+      appBar: const CustomAppBarHome(
+        title: "Cadastro de Funcionario",
+      ),
       body: Form(
         key: formKey,
         child: ListView(
           children: <Widget>[
             CustomTextField(
+              margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
               controller: controller.name,
               labelText: 'Nome',
               validator: (value) => UserValidator.validarNome(value!),
@@ -94,11 +103,28 @@ class _CollaboratorRegistrationState extends State<CollaboratorRegistration> {
               controller: controller.cpf,
               labelText: 'CPF',
               inputType: TextInputType.number,
-              validator: (value) => UserValidator.validarCPF(value!), 
+              validator: (value) => UserValidator.validarCPF(value!),
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
                 CpfInputFormatter()
               ],
+            ),
+            CustomDropdown(
+              labelText: "Selecione o Cargo do Funcionario",
+              hintText: "Selecione o Cargo do Funcionario",
+              value: dropdownJobRole,
+              onChanged: (Object? jobRole) {
+                setState(() {
+                  dropdownJobRole = jobRole!.toString();
+                });
+                throw "";
+              },
+              items: jobRole.map((String jobRole) {
+                return DropdownMenuItem(
+                  value: jobRole,
+                  child: Text(jobRole),
+                );
+              }).toList(),
             ),
             CustomTextField(
               controller: controller.password,
@@ -121,8 +147,10 @@ class _CollaboratorRegistrationState extends State<CollaboratorRegistration> {
                   )
                 : CustomTextButton(
                     buttonText: 'Cadastrar',
-                    onPressed: () => save(context),
-                  ),
+                    onPressed: () {
+                      save(context);
+                      auth.logout(context);
+                    }),
             const SizedBox(
               height: 30,
             ),
@@ -131,4 +159,10 @@ class _CollaboratorRegistrationState extends State<CollaboratorRegistration> {
       ),
     );
   }
+
+  final jobRoleSelected = TextEditingController();
+  List<String> jobRole = [
+    "Motorista",
+    "Administrativo",
+  ];
 }

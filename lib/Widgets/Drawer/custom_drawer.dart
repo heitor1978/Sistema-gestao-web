@@ -116,7 +116,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     ),
                   ),
                   trailing: const Icon(
-                    Icons.person,
+                    Icons.person_add,
                     color: Color.fromARGB(255, 0, 0, 0),
                   ),
                   onTap: () {

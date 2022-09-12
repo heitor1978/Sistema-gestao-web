@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:gestao_web/Services/AuthService/auth_service.dart';
 import 'package:gestao_web/View/CollaboratorRegistration/collaborator_registration.dart';
+import 'package:gestao_web/View/VehicleRegistration/vehicle_registration.dart';
 import 'package:gestao_web/View/export_all_view.dart';
 import 'package:gestao_web/theme/theme.dart';
 
@@ -123,6 +124,25 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => const CollaboratorRegistration(),
+                      ),
+                    );
+                  },
+                ),
+                ListTile(
+                  title: const Text(
+                    "Cadastro de Veiculo",
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
+                  ),
+                  trailing: const Icon(
+                    Icons.person_add,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const VehicleRegistration(),
                       ),
                     );
                   },

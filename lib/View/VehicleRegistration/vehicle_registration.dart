@@ -1,12 +1,13 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gestao_web/Models/vehicle_model.dart';
 import 'package:gestao_web/Services/VehicleService/vehicle_service.dart';
 import 'package:gestao_web/Theme/theme.dart';
 import 'package:gestao_web/widgets/export_all_widget.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 class VehicleRegistration extends StatefulWidget {
@@ -38,38 +39,36 @@ class _VehicleRegistrationState extends State<VehicleRegistration> {
   final TextEditingController _controllerVehicleBrand = TextEditingController();
   final TextEditingController _controllerTypeFuel = TextEditingController();
 
-  Future<void> getImage() async {
+  void getImage() async {
     var file = await _picker.pickImage(source: ImageSource.gallery);
     imageFile = File(file!.path);
-
     var fileExtension = imageFile!.path.split('.').last;
 
     imageName = "${(DateTime.now().millisecondsSinceEpoch)}.$fileExtension";
   }
 
   void save(BuildContext context) async {
-    if (imageFile == null) {
+    /*if (imageFile == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
             content: Text("É preciso adicionar uma imagem do produto")),
       );
     } else {
-      Reference ref = await storage.ref('/vehicle').child(imageName!);
-      ref.putFile(imageFile!);
-      image = await ref.getDownloadURL();
-
-      if (formKey.currentState!.validate()) {
-        VehicleModel model = VehicleModel(
-          placa: _controllerBoard.text,
-          anoVeiculo: _controllerVehicleYear.text,
-          versaoVeiculo: _controllerVehicleModel.text,
-          marca: _controllerVehicleBrand.text,
-          uid: null,
-          tipoCombustivel: _controllerTypeFuel.text,
-          imagem: image,
-        );
-        VehicleService().registration(model, context);
-      }
+      final storageRef = FirebaseStorage.instance.ref();
+      storageRef.child("vehicle/" + imageName!).putFile(imageFile!);
+      image = await storageRef.getDownloadURL();
+    }*/
+    if (formKey.currentState!.validate()) {
+      VehicleModel model = VehicleModel(
+        placa: _controllerBoard.text,
+        anoVeiculo: _controllerVehicleYear.text,
+        versaoVeiculo: _controllerVehicleModel.text,
+        marca: _controllerVehicleBrand.text,
+        uid: null,
+        tipoCombustivel: _controllerTypeFuel.text,
+        imagem: null,
+      );
+      VehicleService().registration(model, context);
     }
   }
 
@@ -157,7 +156,7 @@ class _VehicleRegistrationState extends State<VehicleRegistration> {
                   margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
                   placeholder: "Diesel",
                 ),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                /*Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Text(
                     "Adicionar Imagem do Veiculo",
                     style: TextStyle(
@@ -174,7 +173,7 @@ class _VehicleRegistrationState extends State<VehicleRegistration> {
                     backgroundImage: AssetImage(productName),
                     //radius: ,
                   )*/
-                ]),
+                ]),*/
                 const SizedBox(
                   height: 15,
                 ),

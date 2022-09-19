@@ -136,7 +136,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     ),
                   ),
                   trailing: const Icon(
-                    Icons.person_add,
+                    Icons.car_repair,
                     color: Color.fromARGB(255, 0, 0, 0),
                   ),
                   onTap: () {
@@ -149,13 +149,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 ),
                 ListTile(
                   title: const Text(
-                    "Rotas",
+                    "Funcionarios",
                     style: TextStyle(
                       color: Color.fromARGB(255, 0, 0, 0),
                     ),
                   ),
                   trailing: const Icon(
-                    Icons.assistant_direction,
+                    Icons.person_sharp,
                     color: Color.fromARGB(255, 0, 0, 0),
                   ),
                   onTap: () {

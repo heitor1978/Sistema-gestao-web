@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gestao_web/View/CollaboratorActive/collaborator_drivers.dart';
 import 'package:gestao_web/theme/theme.dart';
 import 'package:gestao_web/Widgets/export_all_widget.dart';
 
@@ -36,6 +37,9 @@ class _HomeState extends State<Home> {
           });
         },
         controller: _pageController,
+        children: [
+          CollaboratorDriver(),
+        ],
       ),
     );
   }

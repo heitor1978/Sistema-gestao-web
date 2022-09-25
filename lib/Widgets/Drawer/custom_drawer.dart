@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:gestao_web/Services/AuthService/auth_service.dart';
-import 'package:gestao_web/View/CollaboratorRegistration/collaborator_registration.dart';
-import 'package:gestao_web/View/VehicleRegistration/vehicle_registration.dart';
 import 'package:gestao_web/View/export_all_view.dart';
 import 'package:gestao_web/theme/theme.dart';
 
@@ -159,30 +156,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     color: Color.fromARGB(255, 0, 0, 0),
                   ),
                   onTap: () {
-                    /*Navigator.of(context).push(
+                    Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const MyOrders(),
+                        builder: (context) =>  CollaboratorDriver(),
                       ),
-                    );*/
-                  },
-                ),
-                ListTile(
-                  title: const Text(
-                    "Registro de Ocorrência",
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    ),
-                  ),
-                  trailing: const Icon(
-                    Icons.assignment,
-                    color: Color.fromARGB(255, 0, 0, 0),
-                  ),
-                  onTap: () {
-                    /*Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const ListAddress(),
-                      ),
-                    );*/
+                    );
                   },
                 ),
               ],

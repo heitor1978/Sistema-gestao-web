@@ -139,7 +139,7 @@ class AuthService extends ChangeNotifier {
     );
   }
 
-  setCustomerModel() async {
+  setCollaboratorModel() async {
     await firestore.collection("funcionarios").doc(getUid()).get().then((event) {
       model.nome = event['nome'];
       model.cpf = event['cpf'];
@@ -148,7 +148,7 @@ class AuthService extends ChangeNotifier {
     });
   }
 
-  getCustomerModel() {
+  getCollaboratorModel() {
     return model;
   }
 

@@ -3,13 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gestao_web/Widgets/export_all_widget.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'dart:async';
+import 'package:gestao_web/View/export_all_view.dart';
+import 'package:gestao_web/View/Administration Collaborators/administration_collaborator.dart';
 
-class CollaboratorDriver extends StatelessWidget {
+class CollaboratorActive extends StatelessWidget {
   final firestore = FirebaseFirestore.instance;
 
-  CollaboratorDriver({
-    Key? key,
-  }) : super(key: key);
 
  getAllCollaborator(){
     return firestore.collection('funcionarios').where('admin', isEqualTo: false).snapshots();
@@ -34,7 +33,7 @@ class CollaboratorDriver extends StatelessWidget {
                     }
                         return InkWell(
                           child: Container(
-                            margin: const EdgeInsets.fromLTRB(15, 15, 15, 10),
+                            margin: const EdgeInsets.fromLTRB(500, 15, 500, 10),
                             width: MediaQuery.of(context).size.width,
                             height: 70,
                             decoration: const BoxDecoration(
@@ -90,7 +89,10 @@ class CollaboratorDriver extends StatelessWidget {
                               ],
                             ),
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(builder: (_) => AdministrationCollaborator()), (route) => false);
+                          },
                         );
                     }
                 );

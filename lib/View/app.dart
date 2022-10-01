@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gestao_web/View/Routes/routes.dart';
-import 'package:gestao_web/View/VehicleRegistration/vehicle_registration.dart';
 import 'package:gestao_web/View/export_all_view.dart';
 
 

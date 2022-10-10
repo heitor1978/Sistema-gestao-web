@@ -50,4 +50,10 @@ class UserValidator {
 
     return null;
   }
+
+    static String? validarNomeDocumento(String nome) {
+    if (nome.isEmpty) return 'Nome do Documento é obrigatório';
+    if (nome.length < 2) return 'Nome inválido';
+    return null;
+  }
 }

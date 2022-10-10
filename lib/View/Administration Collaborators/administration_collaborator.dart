@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:gestao_web/Theme/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gestao_web/Widgets/export_all_widget.dart';
+import 'package:uuid/uuid.dart';
+import 'package:gestao_web/View/export_all_view.dart';
 
 class AdministrationCollaborator extends StatefulWidget {
-  const AdministrationCollaborator({Key? key}) : super(key: key);
+  final String uid;
+  const AdministrationCollaborator({Key? key, required this.uid}) : super(key: key);
 
   @override
   State<AdministrationCollaborator> createState() =>
@@ -23,12 +26,17 @@ class _AdministrationCollaboratorState
   String? name;
 
   int indexNavigatorBar = 0;
-
+  void routes() async {
+    var uuid = const Uuid().v1();
+    firestore.collection('funcionarios').doc(widget.uid).collection('rotas').doc(uuid).set({});
+  }
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 224, 227, 231),
+      drawer: CustomDrawer(),
       appBar: CustomAppBarHome(
         title: "Administração dos Funcionarios",
       ),
@@ -176,7 +184,13 @@ class _AdministrationCollaboratorState
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
-                    onTap: () {},
+                    onTap: (){
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => CollaboratorDocumentation(uid: widget.uid),
+                        )
+                      );
+                    },
                     child: Container(
                       decoration: BoxDecoration(
                           color: colorCard,
@@ -216,11 +230,7 @@ class _AdministrationCollaboratorState
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
-                      onTap: () {
-                        /*Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (_) => CheckScreen()),
-                      (route) => false);*/
-                      },
+                      onTap: () {},
                       child: Container(
                         decoration: BoxDecoration(
                             color: colorCard,

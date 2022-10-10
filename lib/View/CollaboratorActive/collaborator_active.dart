@@ -83,6 +83,7 @@ class CollaboratorActive extends StatelessWidget {
                                         indent: 20,
                                         thickness: 5,
                                       ),
+                                      Text(snapshot.data!.docs[index].get('uid')),
                                     ],
                                   ),
                                 ),
@@ -91,7 +92,7 @@ class CollaboratorActive extends StatelessWidget {
                           ),
                           onTap: () {
                             Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(builder: (_) => AdministrationCollaborator()), (route) => false);
+                              MaterialPageRoute(builder: (_) => AdministrationCollaborator(uid: snapshot.data!.docs[index].get('uid'))), (route) => false);
                           },
                         );
                     }

@@ -5,24 +5,22 @@ import 'package:gestao_web/Models/collaboratordocumentation_model.dart';
 
 import 'package:uuid/uuid.dart';
 
-class CollaboratorDocumentatioException implements Exception {
+class CollaboratorDocumentationException implements Exception {
   String message;
-  CollaboratorDocumentatioException(this.message);
+  CollaboratorDocumentationException(this.message);
 }
 
-class CollaboratorDocumentatioService extends ChangeNotifier {
+class CollaboratorDocumentationService extends ChangeNotifier {
   final firestore = FirebaseFirestore.instance;
-  Map<int, Map<String, dynamic>> itens = {};
-  Map<int, Map<String, dynamic>> sizes = {};
 
-  registration(CollaboratorDocumentationModel model, BuildContext context, String? uid) {
-    var uuid = const Uuid();
-    var uidCollaboratorDocumentation = uuid.v1();
+  registration(CollaboratorDocumentationModel model, BuildContext context) {
+    var uidCollaboratorDocumentation = Uuid().v1();
     try {
-      firestore.collection('funcionarios').doc(uid).collection('documentacao').doc(uidCollaboratorDocumentation).set({
+      firestore.collection('funcionarios').doc(model.uid).collection('documentacao').doc(uidCollaboratorDocumentation).set({
         "nome": model.name,
         "arquivo": model.file,
         "uid": model.uid,
+        "uidDocumento": uidCollaboratorDocumentation,
       });
     } on FirebaseException catch (e) {
       throw Exception(e.code);

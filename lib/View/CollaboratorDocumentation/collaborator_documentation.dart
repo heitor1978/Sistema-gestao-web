@@ -38,19 +38,20 @@ class _CollaboratorDocumentationState extends State<CollaboratorDocumentation> {
 
     if(result == null) return;
     
+    print(widget.uid);
   }
 
   void save(BuildContext context) async {
-    await storage.ref().child("documentation/$fileName").putData(file!);
-    var fileURL = await storage.ref().getDownloadURL();
-
     if (formKey.currentState!.validate()) {
+      await storage.ref().child("documentation/$fileName").putData(file!);
+      var fileURL = await storage.ref().child("documentation/$fileName").getDownloadURL();
+      
       CollaboratorDocumentationModel model = CollaboratorDocumentationModel(
         name: controller.name!.text.trim(),
         file: fileURL,
         uid: widget.uid,
       );
-      CollaboratorDocumentatioService().registration(model, context, widget.uid);
+      CollaboratorDocumentationService().registration(model, context);
     }
   }
 
@@ -73,56 +74,12 @@ class _CollaboratorDocumentationState extends State<CollaboratorDocumentation> {
               labelText: 'Nome do Arquivo',
               validator: (value) => UserValidator.validarNomeDocumento(value!),
             ),
-            InkWell(
-              child: Container(
-                margin: const EdgeInsets.fromLTRB(500, 15, 500, 10),
-                width: MediaQuery.of(context).size.width,
-                height: 70,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color.fromARGB(25, 10, 10, 10),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(0, 3),
-                    ),
-                  ],
-                  color: primaryColor,
-                ),
-                child: Row(
-                  children: [
-                    Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Selecione o Arquivo",
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+            CustomTextButton(
+              buttonText: 'Selecione o Arquivo', 
+              onPressed: () {
+                getFile();
+              }
               ),
-              onTap: getFile,
-            ),
             CustomTextButton(
                 buttonText: 'Cadastrar',
                 onPressed: () {

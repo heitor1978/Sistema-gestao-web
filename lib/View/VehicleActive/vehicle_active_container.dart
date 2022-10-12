@@ -6,12 +6,16 @@ import 'dart:async';
 import 'package:gestao_web/View/export_all_view.dart';
 import 'package:gestao_web/View/AdministrationCollaborators/administration_collaborator.dart';
 
-class CollaboratorActive extends StatelessWidget {
+class VehicleActiveContainer extends StatelessWidget {
+  VehicleActiveContainer({
+    super.key,
+    required uid,
+  });
+  String? uid;
   final firestore = FirebaseFirestore.instance;
 
-
- getAllCollaborator(){
-    return firestore.collection('funcionarios').where('admin', isEqualTo: false).snapshots();
+ getAllVehicle(){
+    return firestore.collection('veiculos').where('veiculoAtivo', isEqualTo: true).snapshots();
   }
 
   @override
@@ -23,7 +27,7 @@ class CollaboratorActive extends StatelessWidget {
         children: <Widget>[
           Flexible(
             child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-              stream: getAllCollaborator(),
+              stream: getAllVehicle(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 return ListView.builder(
                   itemCount: snapshot.data?.docs.length,
@@ -69,7 +73,7 @@ class CollaboratorActive extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        snapshot.data!.docs[index].get('nome'),
+                                        snapshot.data!.docs[index].get('versaoVeiculo'),
                                         style: const TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold,
@@ -83,7 +87,7 @@ class CollaboratorActive extends StatelessWidget {
                                         indent: 20,
                                         thickness: 5,
                                       ),
-                                      Text(snapshot.data!.docs[index].get('uid')),
+                                      Text(snapshot.data!.docs[index].get('marca')),
                                     ],
                                   ),
                                 ),
@@ -91,8 +95,8 @@ class CollaboratorActive extends StatelessWidget {
                             ),
                           ),
                           onTap: () {
-                            Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(builder: (_) => AdministrationCollaborator(uid: snapshot.data!.docs[index].get('uid'))), (route) => false);
+                            /*Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(builder: (_) => AdministrationCollaborator(uid: snapshot.data!.docs[index].get('uid'))), (route) => false);*/
                           },
                         );
                     }

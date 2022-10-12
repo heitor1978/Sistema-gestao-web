@@ -88,7 +88,13 @@ class _AdministrationCollaboratorState
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => VehicleActiveView(uid: widget.uid),
+                                  )
+                                );
+                              },
                               child: Padding(
                                 padding:
                                     const EdgeInsets.fromLTRB(18, 0, 18, 0),

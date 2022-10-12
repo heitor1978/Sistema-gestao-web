@@ -33,12 +33,6 @@ class _CollaboratorDocumentationState extends State<CollaboratorDocumentation> {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
     file = result!.files.first.bytes;
     fileName = result.files.first.name;
-
-    print(result);
-
-    if(result == null) return;
-    
-    print(widget.uid);
   }
 
   void save(BuildContext context) async {

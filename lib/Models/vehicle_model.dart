@@ -1,4 +1,5 @@
 class VehicleModel{
+  bool? veiculoAtivo;
   String? placa;
   String? anoVeiculo;
   String? versaoVeiculo;
@@ -9,6 +10,7 @@ class VehicleModel{
 
 
   VehicleModel({
+    required this.veiculoAtivo,
     required this.placa,
     required this.anoVeiculo,
     required this.versaoVeiculo,
@@ -19,6 +21,7 @@ class VehicleModel{
   });
 
   VehicleModel.fromMap(Map<String, dynamic> map){
+    veiculoAtivo = map['veiculoAtivo'];
     placa = map['placa'];
     anoVeiculo = map['anoModelo'];
     versaoVeiculo = map['versaoVeiculo'];

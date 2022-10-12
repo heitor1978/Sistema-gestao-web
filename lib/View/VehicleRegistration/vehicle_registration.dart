@@ -21,9 +21,7 @@ class VehicleRegistration extends StatefulWidget {
 
 class _VehicleRegistrationState extends State<VehicleRegistration> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  FirebaseStorage storage = FirebaseStorage.instance;
-  final ImagePicker _picker = ImagePicker();
-  File? imageFile;
+
 
   String board = '';
   String vehicleYear = '';
@@ -32,6 +30,9 @@ class _VehicleRegistrationState extends State<VehicleRegistration> {
   String typeFuel = '';
   String? imageName;
   String? image;
+  String? dropdownVehicleActive;
+
+  bool vehicleActiveSave = false;
 
   final TextEditingController _controllerBoard = TextEditingController();
   final TextEditingController _controllerVehicleYear = TextEditingController();
@@ -39,27 +40,13 @@ class _VehicleRegistrationState extends State<VehicleRegistration> {
   final TextEditingController _controllerVehicleBrand = TextEditingController();
   final TextEditingController _controllerTypeFuel = TextEditingController();
 
-  void getImage() async {
-    var file = await _picker.pickImage(source: ImageSource.gallery);
-    imageFile = File(file!.path);
-    var fileExtension = imageFile!.path.split('.').last;
-
-    imageName = "${(DateTime.now().millisecondsSinceEpoch)}.$fileExtension";
-  }
-
   void save(BuildContext context) async {
-    /*if (imageFile == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text("É preciso adicionar uma imagem do produto")),
-      );
-    } else {
-      final storageRef = FirebaseStorage.instance.ref();
-      storageRef.child("vehicle/" + imageName!).putFile(imageFile!);
-      image = await storageRef.getDownloadURL();
-    }*/
     if (formKey.currentState!.validate()) {
+      if(dropdownVehicleActive == "Operação"){
+        vehicleActiveSave = true;
+      }
       VehicleModel model = VehicleModel(
+        veiculoAtivo: vehicleActiveSave,
         placa: _controllerBoard.text,
         anoVeiculo: _controllerVehicleYear.text,
         versaoVeiculo: _controllerVehicleModel.text,
@@ -143,6 +130,23 @@ class _VehicleRegistrationState extends State<VehicleRegistration> {
                   margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
                   placeholder: "Mercedes",
                 ),
+                CustomDropdown(
+                  labelText: "Selecione a Condição do Veiculo",
+                  hintText: "Selecione a Condição do Veiculo",
+                  value: dropdownVehicleActive,
+                  onChanged: (Object? jobRole) {
+                    setState(() {
+                      dropdownVehicleActive = jobRole!.toString();
+                    });
+                    throw "";
+                  },
+                  items: vehicleActive.map((String vehicleActive) {
+                    return DropdownMenuItem(
+                      value: vehicleActive,
+                      child: Text(vehicleActive),
+                    );
+                  }).toList(),
+                ),
                 CustomTextField(
                   onSaved: (value) => typeFuel = value!,
                   validator: (value) {
@@ -156,24 +160,6 @@ class _VehicleRegistrationState extends State<VehicleRegistration> {
                   margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
                   placeholder: "Diesel",
                 ),
-                /*Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text(
-                    "Adicionar Imagem do Veiculo",
-                    style: TextStyle(
-                      color: primaryColor,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: getImage,
-                    icon: Icon(Icons.linked_camera_rounded),
-                    color: primaryColor,
-                    iconSize: 50,
-                  ),
-                  /*CircleAvatar(
-                    backgroundImage: AssetImage(productName),
-                    //radius: ,
-                  )*/
-                ]),*/
                 const SizedBox(
                   height: 15,
                 ),
@@ -191,6 +177,10 @@ class _VehicleRegistrationState extends State<VehicleRegistration> {
       ),
     );
   }
-
-  final categorySelected = TextEditingController();
+  
+  final vehicleActiveSelected = TextEditingController();
+  List<String> vehicleActive = [
+    "Manutenção",
+    "Operação",
+  ];
 }

@@ -21,6 +21,7 @@ class VehicleService extends ChangeNotifier {
     var uidVehicle = uuid.v1();
     try {
       firestore.collection('veiculos').doc(uidVehicle).set({
+        "veiculoAtivo": model.veiculoAtivo,
         "placa": model.placa,
         "anoVeiculo": model.anoVeiculo,
         "versaoVeiculo": model.versaoVeiculo,

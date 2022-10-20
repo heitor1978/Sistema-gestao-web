@@ -9,9 +9,10 @@ class VehicleActiveContainer extends StatelessWidget {
   });
   final String? uid;
   final firestore = FirebaseFirestore.instance;
+  var docs;
 
   void save(String anoVeiculo, String marca, String placa, String tipoCombustivel, String versaoVeiculo, String uid, String uidVehicle) async {
-    firestore.collection('funcionarios').doc(uid).collection('veiculo').doc(uidVehicle).set({
+    firestore.collection('funcionarios').doc(uid).collection('veiculo').doc(uid).set({
       "anoVeiculo": anoVeiculo,
       "marca": marca,
       "placa": placa,
@@ -36,6 +37,7 @@ class VehicleActiveContainer extends StatelessWidget {
             child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
               stream: getAllVehicle(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if(!snapshot.hasData) return const CircularProgressIndicator();
                 return ListView.builder(
                   itemCount: snapshot.data?.docs.length,
                   itemBuilder: (_, index) {

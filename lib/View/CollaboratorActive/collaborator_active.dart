@@ -25,6 +25,7 @@ class CollaboratorActive extends StatelessWidget {
             child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
               stream: getAllCollaborator(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if(!snapshot.hasData) return const CircularProgressIndicator();
                 return ListView.builder(
                   itemCount: snapshot.data?.docs.length,
                   itemBuilder: (_, index) {

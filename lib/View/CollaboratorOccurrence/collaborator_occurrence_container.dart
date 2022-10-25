@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:gestao_web/Widgets/export_all_widget.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'dart:async';
-import 'package:gestao_web/View/export_all_view.dart';
-import 'package:gestao_web/View/AdministrationCollaborators/administration_collaborator.dart';
 
-class CollaboratorActive extends StatelessWidget {
+
+
+class CollaboratorOccurrenceContainer extends StatelessWidget {
+  CollaboratorOccurrenceContainer({super.key, this.uid});
+
+  final String? uid;
   final firestore = FirebaseFirestore.instance;
 
-
- getAllCollaborator(){
-    return firestore.collection('funcionarios').where('admin', isEqualTo: false).snapshots();
+  getAllOccurrence(){
+    return firestore.collection('funcionarios').doc(uid).collection('ocorrencia').snapshots();
   }
-
+ 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // ignore: sort_child_properties_last
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Flexible(
             child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-              stream: getAllCollaborator(),
+              stream: getAllOccurrence(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if(!snapshot.hasData) return const CircularProgressIndicator();
                 return ListView.builder(
@@ -70,7 +68,7 @@ class CollaboratorActive extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        snapshot.data!.docs[index].get('nome'),
+                                        snapshot.data!.docs[index].get('nomeOcorrencia'),
                                         style: const TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold,
@@ -84,7 +82,7 @@ class CollaboratorActive extends StatelessWidget {
                                         indent: 20,
                                         thickness: 5,
                                       ),
-                                      Text(snapshot.data!.docs[index].get('uid')),
+                                      Text(snapshot.data!.docs[index].get('registroOcorrencia')),
                                     ],
                                   ),
                                 ),
@@ -92,8 +90,7 @@ class CollaboratorActive extends StatelessWidget {
                             ),
                           ),
                           onTap: () {
-                            Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(builder: (_) => AdministrationCollaborator(uid: snapshot.data!.docs[index].get('uid'))), (route) => false);
+                    
                           },
                         );
                     }
@@ -102,8 +99,8 @@ class CollaboratorActive extends StatelessWidget {
             ),
           ),
         ],
-      ),
-      color: const Color.fromARGB(255, 240, 240, 240),
+      ) ,
     );
   }
 }
+

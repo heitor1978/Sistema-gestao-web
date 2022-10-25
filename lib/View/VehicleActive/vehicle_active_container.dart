@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:gestao_web/Widgets/export_all_widget.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'dart:async';
-import 'package:gestao_web/View/export_all_view.dart';
-import 'package:gestao_web/View/AdministrationCollaborators/administration_collaborator.dart';
+
 
 class VehicleActiveContainer extends StatelessWidget {
   VehicleActiveContainer({
     super.key,
-    required uid,
+    this.uid
   });
-  String? uid;
+  final String? uid;
   final firestore = FirebaseFirestore.instance;
+  var docs;
+
+  void save(String anoVeiculo, String marca, String placa, String tipoCombustivel, String versaoVeiculo, String uid, String uidVehicle) async {
+    firestore.collection('funcionarios').doc(uid).collection('veiculo').doc(uid).set({
+      "anoVeiculo": anoVeiculo,
+      "marca": marca,
+      "placa": placa,
+      "tipoCombustivel": tipoCombustivel,
+      "uid": uidVehicle,
+      "versaoVeiculo": versaoVeiculo,
+    });
+  }
 
  getAllVehicle(){
     return firestore.collection('veiculos').where('veiculoAtivo', isEqualTo: true).snapshots();
@@ -29,6 +37,7 @@ class VehicleActiveContainer extends StatelessWidget {
             child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
               stream: getAllVehicle(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if(!snapshot.hasData) return const CircularProgressIndicator();
                 return ListView.builder(
                   itemCount: snapshot.data?.docs.length,
                   itemBuilder: (_, index) {
@@ -95,8 +104,7 @@ class VehicleActiveContainer extends StatelessWidget {
                             ),
                           ),
                           onTap: () {
-                            /*Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(builder: (_) => AdministrationCollaborator(uid: snapshot.data!.docs[index].get('uid'))), (route) => false);*/
+                            save(snapshot.data!.docs[index].get('anoVeiculo'), snapshot.data!.docs[index].get('marca'), snapshot.data!.docs[index].get('placa'), snapshot.data!.docs[index].get('tipoCombustivel'), snapshot.data!.docs[index].get('versaoVeiculo'), uid!, snapshot.data!.docs[index].get('uid'));
                           },
                         );
                     }

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:gestao_web/Theme/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gestao_web/Widgets/export_all_widget.dart';
-import 'package:uuid/uuid.dart';
 import 'package:gestao_web/View/export_all_view.dart';
 
 class AdministrationCollaborator extends StatefulWidget {
@@ -24,12 +23,6 @@ class _AdministrationCollaboratorState
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   String? name;
-
-  int indexNavigatorBar = 0;
-  void routes() async {
-    var uuid = const Uuid().v1();
-    firestore.collection('funcionarios').doc(widget.uid).collection('rotas').doc(uuid).set({});
-  }
   
 
   @override
@@ -275,7 +268,13 @@ class _AdministrationCollaboratorState
                 padding: const EdgeInsets.fromLTRB(500, 0, 500, 15),
                 child: InkWell(
                   borderRadius: BorderRadius.circular(15),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => CollaboratorOccurrence(uid: widget.uid),
+                        )
+                      );
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                         color: colorCard,

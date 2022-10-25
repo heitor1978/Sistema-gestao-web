@@ -11,6 +11,8 @@ export 'package:gestao_web/View/CollaboratorRegistration/collaborator_registrati
 // Tela Documentações de Viagem
 export 'package:gestao_web/View/CollaboratorDocumentation/collaborator_documentation.dart';
 // Tela Ocorrencia de Viagem
-export 'package:gestao_web/View/CollaboratorOccurrence/collaborator_occurrence.dart';
+export 'package:gestao_web/View/CollaboratorOccurrence/collaborator_occurrence_view.dart';
 // Tela de Lista de Veiculos
 export 'package:gestao_web/View/VehicleActive/vehicle_active_view.dart';
+// Tela de Ocorrencias
+export 'package:gestao_web/View/CollaboratorOccurrence/collaborator_occurrence_view.dart';

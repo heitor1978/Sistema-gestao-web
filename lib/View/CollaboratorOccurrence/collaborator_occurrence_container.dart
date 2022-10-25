@@ -10,7 +10,7 @@ class CollaboratorOccurrenceContainer extends StatelessWidget {
   final firestore = FirebaseFirestore.instance;
 
   getAllOccurrence(){
-    firestore.collection('funcionarios').doc(uid).collection('ocorrencia').doc().snapshots();
+    return firestore.collection('funcionarios').doc(uid).collection('ocorrencia').snapshots();
   }
  
   @override

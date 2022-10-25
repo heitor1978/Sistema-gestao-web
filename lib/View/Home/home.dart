@@ -15,7 +15,6 @@ class _HomeState extends State<Home> {
   final PageController _pageController = PageController();
   int indexNavigatorBar = 0;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

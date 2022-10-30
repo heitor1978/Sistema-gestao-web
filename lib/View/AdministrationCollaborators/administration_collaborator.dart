@@ -129,7 +129,12 @@ class _AdministrationCollaboratorState
               Padding(
                 padding: const EdgeInsets.fromLTRB(500, 15, 500, 15),
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          CollaboratorRoutes(uid: widget.uid),
+                    ));
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                         color: colorCard,

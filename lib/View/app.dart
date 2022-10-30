@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gestao_web/View/ScreenStart/screen_start.dart';
 import 'package:gestao_web/View/export_all_view.dart';
 
 class App extends StatelessWidget {
@@ -9,7 +8,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       //home: Login(),
-      home: ScreenStart(),
+      home: Login(),
       debugShowCheckedModeBanner: false,
     );
   }

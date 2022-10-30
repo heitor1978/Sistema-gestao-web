@@ -16,3 +16,5 @@ export 'package:gestao_web/View/CollaboratorOccurrence/collaborator_occurrence_v
 export 'package:gestao_web/View/VehicleActive/vehicle_active_view.dart';
 // Tela de Ocorrencias
 export 'package:gestao_web/View/CollaboratorOccurrence/collaborator_occurrence_view.dart';
+// Tela de Checklist
+export 'package:gestao_web/View/CollaboratorCheckList/collaborator_checklist_view.dart';

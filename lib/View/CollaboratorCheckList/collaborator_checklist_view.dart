@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:gestao_web/View/CollaboratorActive/collaborator_active.dart';
+import 'package:gestao_web/View/CollaboratorCheckList/collaborator_checklist_container.dart';
 import 'package:gestao_web/Widgets/export_all_widget.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+
+class CollaboratorChecklistView extends StatefulWidget {
+  final String? uid;
+  const CollaboratorChecklistView({super.key, this.uid});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<CollaboratorChecklistView> createState() =>
+      _CollaboratorChecklistViewState();
 }
 
-class _HomeState extends State<Home> {
+class _CollaboratorChecklistViewState extends State<CollaboratorChecklistView> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final PageController _pageController = PageController();
   int indexNavigatorBar = 0;
@@ -20,14 +23,8 @@ class _HomeState extends State<Home> {
       extendBodyBehindAppBar: true,
       extendBody: true,
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
-      drawer: const CustomDrawer(),
-      appBar: const CustomAppBarHome(
-        icon: Icon(
-          Icons.screen_search_desktop_sharp,
-          color: Color.fromARGB(255, 240, 240, 240),
-        ),
-        title: "Bem-vindo",
-      ),
+      drawer: CustomDrawer(),
+      appBar: CustomAppBarHome(title: "Checklist dos Funcionários"),
       body: PageView(
         onPageChanged: (int page) {
           setState(() {
@@ -36,7 +33,7 @@ class _HomeState extends State<Home> {
         },
         controller: _pageController,
         children: [
-          CollaboratorActive(),
+          CollaboratorChecklistContainer(uid: widget.uid),
         ],
       ),
     );

@@ -8,7 +8,8 @@ import 'package:gestao_web/View/export_all_view.dart';
 
 class AdministrationCollaborator extends StatefulWidget {
   final String uid;
-  const AdministrationCollaborator({Key? key, required this.uid}) : super(key: key);
+  const AdministrationCollaborator({Key? key, required this.uid})
+      : super(key: key);
 
   @override
   State<AdministrationCollaborator> createState() =>
@@ -23,7 +24,6 @@ class _AdministrationCollaboratorState
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   String? name;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -82,11 +82,10 @@ class _AdministrationCollaboratorState
                           children: [
                             TextButton(
                               onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => VehicleActiveView(uid: widget.uid),
-                                  )
-                                );
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      VehicleActiveView(uid: widget.uid),
+                                ));
                               },
                               child: Padding(
                                 padding:
@@ -161,16 +160,6 @@ class _AdministrationCollaboratorState
                                   )
                                 ],
                               ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "3 Rotas Previstas",
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 14,
-                                    ),
-                                  )
-                                ],
-                              ),
                             ],
                           ),
                         ],
@@ -183,12 +172,11 @@ class _AdministrationCollaboratorState
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
-                    onTap: (){
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => CollaboratorDocumentation(uid: widget.uid),
-                        )
-                      );
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            CollaboratorDocumentation(uid: widget.uid),
+                      ));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -229,7 +217,12 @@ class _AdministrationCollaboratorState
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              CollaboratorChecklistView(uid: widget.uid),
+                        ));
+                      },
                       child: Container(
                         decoration: BoxDecoration(
                             color: colorCard,
@@ -269,11 +262,10 @@ class _AdministrationCollaboratorState
                 child: InkWell(
                   borderRadius: BorderRadius.circular(15),
                   onTap: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => CollaboratorOccurrence(uid: widget.uid),
-                        )
-                      );
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          CollaboratorOccurrence(uid: widget.uid),
+                    ));
                   },
                   child: Container(
                     decoration: BoxDecoration(

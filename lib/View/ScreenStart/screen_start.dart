@@ -40,6 +40,8 @@ class _ScreenStartState extends State<ScreenStart> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
+      child: Form(
+        key: _formKey,
         child: ListView(
           padding: EdgeInsets.all(0),
           children: <Widget>[
@@ -96,7 +98,7 @@ class _ScreenStartState extends State<ScreenStart> {
                   ),
           ],
         ),
-      ),
+      )),
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         bottom: PreferredSize(

@@ -129,7 +129,12 @@ class _AdministrationCollaboratorState
               Padding(
                 padding: const EdgeInsets.fromLTRB(500, 15, 500, 15),
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          CollaboratorRoutes(uid: widget.uid),
+                    ));
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                         color: colorCard,
@@ -156,16 +161,6 @@ class _AdministrationCollaboratorState
                                     style: GoogleFonts.poppins(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w600,
-                                    ),
-                                  )
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "3 Rotas Previstas",
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 14,
                                     ),
                                   )
                                 ],
@@ -227,7 +222,12 @@ class _AdministrationCollaboratorState
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              CollaboratorChecklistView(uid: widget.uid),
+                        ));
+                      },
                       child: Container(
                         decoration: BoxDecoration(
                             color: colorCard,

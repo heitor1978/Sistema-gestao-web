@@ -21,15 +21,18 @@ class _CollaboratorRoutesState extends State<CollaboratorRoutes> {
 
   final TextEditingController latitude = TextEditingController();
   final TextEditingController longitude = TextEditingController();
+  final TextEditingController nomeRota = TextEditingController();
 
 
 
   void save(BuildContext context) async {
     var uidCollaboratorRoutes = Uuid().v1();
+    var latitudeDouble = double.parse(latitude.text);
+    var longitudeDouble = double.parse(longitude.text);
     if(formKey.currentState!.validate()){
       firestore.collection('funcionarios').doc(widget.uid).collection('rotas').doc(uidCollaboratorRoutes).set({
-        "latitude": latitude.text,
-        "longitude": longitude.text,
+        "nomeRota": nomeRota.text,
+        "localizacaoAtual": GeoPoint(latitudeDouble, longitudeDouble),
       });
     }
   }
@@ -45,6 +48,12 @@ class _CollaboratorRoutesState extends State<CollaboratorRoutes> {
         key: formKey,
         child: ListView(
           children: [
+            CustomTextField(
+              margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+              controller: nomeRota,
+              labelText: 'Nome da Viagem',
+              validator: (value) => UserValidator.validarLocalizacao(value!),
+            ),
             CustomTextField(
               margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
               controller: latitude,

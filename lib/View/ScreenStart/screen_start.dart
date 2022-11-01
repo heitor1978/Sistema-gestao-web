@@ -100,7 +100,7 @@ class _ScreenStartState extends State<ScreenStart> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(100),
+          preferredSize: Size.fromHeight(50),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             //crossAxisAlignment: CrossAxisAlignment.center,
@@ -258,12 +258,15 @@ class _ScreenStartState extends State<ScreenStart> {
           ),
         ),
       ),
-      /*body: Container(
-        padding: EdgeInsets.fromLTRB(0, 250, 0, 0),
-        width: 200,
-        height: 200,
-        child: Image.asset('assets/images/caminhao1.png'),
-      ),*/
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+        child: Image.asset(
+          'assets/images/caminhao1.png',
+          fit: BoxFit.cover,
+          width: double.infinity,
+          height: double.infinity,
+        ),
+      ),
     );
   }
 }

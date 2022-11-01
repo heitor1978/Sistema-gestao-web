@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
-import 'package:gestao_web/theme/theme.dart';
+import 'package:gestao_web/Theme/theme.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
@@ -46,9 +46,7 @@ class CustomTextField extends StatelessWidget {
           margin: margin ?? const EdgeInsets.fromLTRB(15, 5, 15, 0),
           child: SizedBox(
             height: height ?? 90,
-            width: width != null
-                ? double?.parse(width.toString())
-                : 500,
+            width: width != null ? double?.parse(width.toString()) : 500,
             child: TextFormField(
               controller: controller,
               onSaved: onSaved,

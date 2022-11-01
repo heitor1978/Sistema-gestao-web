@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gestao_web/theme/theme.dart';
+import 'package:gestao_web/Theme/theme.dart';
 
 class CustomDropdown extends StatelessWidget {
   final String? labelText;
@@ -20,8 +20,8 @@ class CustomDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(430, 0, 430, 30),
-      width: MediaQuery.of(context).size.width,
+      //margin: const EdgeInsets.fromLTRB(430, 0, 15, 30),
+      width: 200, //MediaQuery.of(context).size.width,
       child: DropdownButtonFormField(
         decoration: InputDecoration(
           floatingLabelStyle: const TextStyle(

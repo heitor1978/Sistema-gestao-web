@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gestao_web/View/AdministrationCollaborators/administration_collaborator.dart';
 import 'package:gestao_web/View/ScreenStart/screen_start.dart';
+import 'package:gestao_web/View/CollaboratorRegistration/vehicle_registration_dois.dart';
 import 'package:gestao_web/View/export_all_view.dart';
 
 import 'Home/home2.dart';
@@ -13,7 +14,8 @@ class App extends StatelessWidget {
     return const MaterialApp(
       //home: Login(),
       //home: ScreenStart(),
-      home: HomeDois(),
+      //home: HomeDois(),
+      home: CollaboratorRegistrationDois(),
       debugShowCheckedModeBanner: false,
     );
   }

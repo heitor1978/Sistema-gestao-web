@@ -33,8 +33,7 @@ class _HomeDoisState extends State<HomeDois> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBarHome(
-        icon: Icon(Icons.home),
-        title: 'Home',
+        title: "Home",
       ),
       body: Row(
         children: <Widget>[
@@ -46,7 +45,7 @@ class _HomeDoisState extends State<HomeDois> {
                 child: ElevatedButton.icon(
                     onPressed: () {},
                     icon: Icon(Icons.people_alt_outlined),
-                    label: Text("Colaboradores Ativo       ")),
+                    label: Text("Colaboradores             ")),
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(10, 0, 10, 30),

@@ -14,11 +14,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       //home: Login(),
-      //home: ScreenStart(),
-      //home: HomeDois(),
-      //home: CollaboratorRegistrationDois(),
-      home: VehicleRegistrationDois(),
-      //home: VehicleRegistration(),
+      //home: VehicleRegistrationDois(),
+      home: CollaboratorRoutes(),
       debugShowCheckedModeBanner: false,
     );
   }

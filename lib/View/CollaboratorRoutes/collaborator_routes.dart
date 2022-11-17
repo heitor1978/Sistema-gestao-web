@@ -18,19 +18,21 @@ class _CollaboratorRoutesState extends State<CollaboratorRoutes> {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-
   final TextEditingController latitude = TextEditingController();
   final TextEditingController longitude = TextEditingController();
   final TextEditingController nomeRota = TextEditingController();
-
-
 
   void save(BuildContext context) async {
     var uidCollaboratorRoutes = Uuid().v1();
     var latitudeDouble = double.parse(latitude.text);
     var longitudeDouble = double.parse(longitude.text);
-    if(formKey.currentState!.validate()){
-      firestore.collection('funcionarios').doc(widget.uid).collection('rotas').doc(uidCollaboratorRoutes).set({
+    if (formKey.currentState!.validate()) {
+      firestore
+          .collection('funcionarios')
+          .doc(widget.uid)
+          .collection('rotas')
+          .doc(uidCollaboratorRoutes)
+          .set({
         "nomeRota": nomeRota.text,
         "localizacaoAtual": GeoPoint(latitudeDouble, longitudeDouble),
       });
@@ -48,23 +50,54 @@ class _CollaboratorRoutesState extends State<CollaboratorRoutes> {
         key: formKey,
         child: ListView(
           children: [
-            CustomTextField(
-              margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-              controller: nomeRota,
-              labelText: 'Nome da Viagem',
-              validator: (value) => UserValidator.validarLocalizacao(value!),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(150, 50, 150, 0),
+              child: TextFormField(
+                maxLength: 14,
+                textCapitalization: TextCapitalization.words,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                  filled: true,
+                  icon: Icon(Icons.route),
+                  hintText: "Balsamo",
+                  labelText: "Nome da Viagem",
+                ),
+                controller: nomeRota,
+                validator: (value) => UserValidator.validarLocalizacao(value!),
+              ),
             ),
-            CustomTextField(
-              margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-              controller: latitude,
-              labelText: 'Latitude',
-              validator: (value) => UserValidator.validarLocalizacao(value!),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(150, 50, 150, 0),
+              child: TextFormField(
+                maxLength: 14,
+                textCapitalization: TextCapitalization.words,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                  filled: true,
+                  icon: Icon(Icons.threesixty),
+                  hintText: "1°24'12.2N 2°10'26.5E.",
+                  labelText: "Latitude",
+                ),
+                controller: latitude,
+                validator: (value) => UserValidator.validarLocalizacao(value!),
+              ),
             ),
-            CustomTextField(
-              margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-              controller: longitude,
-              labelText: 'Longitude',
-              validator: (value) => UserValidator.validarNomeDocumento(value!),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(150, 50, 150, 50),
+              child: TextFormField(
+                maxLength: 14,
+                textCapitalization: TextCapitalization.words,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                  filled: true,
+                  icon: Icon(Icons.threesixty),
+                  hintText: "1°24'12.2N 2°10'26.5E.",
+                  labelText: "Longitude",
+                ),
+                controller: longitude,
+                validator: (value) =>
+                    UserValidator.validarNomeDocumento(value!),
+              ),
             ),
             CustomTextButton(
                 buttonText: 'Cadastrar',

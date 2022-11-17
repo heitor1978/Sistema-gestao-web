@@ -34,7 +34,7 @@ class VehicleService extends ChangeNotifier {
       throw Exception(e.code);
     }
 
-    Navigator.of(context).pop();
+
   }
 
 

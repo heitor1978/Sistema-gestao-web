@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gestao_web/Services/AuthService/auth_service.dart';
+import 'package:gestao_web/View/CollaboratorRegistration/collaborator_registration.dart';
 import 'package:gestao_web/View/export_all_view.dart';
 import 'package:gestao_web/theme/theme.dart';
 

@@ -1,27 +1,27 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:gestao_web/View/CollaboratorRegistration/collaborator_registration.dart';
+import 'package:gestao_web/Widgets/Dropdown/custom_dropdown_web.dart';
+import 'package:gestao_web/Widgets/export_all_widget.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:gestao_web/View/export_all_view.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gestao_web/Models/vehicle_model.dart';
 import 'package:gestao_web/Services/VehicleService/vehicle_service.dart';
-import 'package:gestao_web/Theme/theme.dart';
-import 'package:gestao_web/widgets/export_all_widget.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:brasil_fields/brasil_fields.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 
 class VehicleRegistration extends StatefulWidget {
-  const VehicleRegistration({
-    Key? key,
-  }) : super(key: key);
+  const VehicleRegistration({Key? key}) : super(key: key);
 
   @override
   State<VehicleRegistration> createState() => _VehicleRegistrationState();
 }
 
 class _VehicleRegistrationState extends State<VehicleRegistration> {
+  final firestore = FirebaseFirestore.instance;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  String? valueDropDownButtonType;
+  String? valueDropDownButtonActive;
+  String? dropdownCondition;
 
   String board = '';
   String vehicleYear = '';
@@ -30,7 +30,6 @@ class _VehicleRegistrationState extends State<VehicleRegistration> {
   String typeFuel = '';
   String? imageName;
   String? image;
-  String? dropdownVehicleActive;
 
   bool vehicleActiveSave = false;
 
@@ -42,7 +41,7 @@ class _VehicleRegistrationState extends State<VehicleRegistration> {
 
   void save(BuildContext context) async {
     if (formKey.currentState!.validate()) {
-      if(dropdownVehicleActive == "Operação"){
+      if (dropdownCondition == "Operacional") {
         vehicleActiveSave = true;
       }
       VehicleModel model = VehicleModel(
@@ -59,128 +58,241 @@ class _VehicleRegistrationState extends State<VehicleRegistration> {
     }
   }
 
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      backgroundColor: const Color.fromARGB(255, 240, 240, 240),
-      drawer: CustomDrawer(),
-      appBar: const CustomAppBarHome(
-        title: "Cadastro de Veiculos",
-      ),
-      body: Form(
-        key: formKey,
-        child: ListView(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  height: 15,
-                ),
-                CustomTextField(
-                  onSaved: (value) => board = value!,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Campo placa é obrigatorio!";
-                    }
-                    return null;
-                  },
-                  controller: _controllerBoard,
-                  labelText: "Placa do Veiculo",
-                  placeholder: "AAA-0000",
-                ),
-                CustomTextField(
-                  onSaved: (value) => vehicleYear = value!,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Campo Ano do Veiculo é obrigatório";
-                    }
-                    return null;
-                  },
-                  controller: _controllerVehicleYear,
-                  labelText: "Ano do Veiculo",
-                  margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                  placeholder: "2022",
-                ),
-                CustomTextField(
-                  onSaved: (value) => vehicleModelo = value!,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Campo Modelo do Veiculo é obrigatório";
-                    }
-                    return null;
-                  },
-                  controller: _controllerVehicleModel,
-                  labelText: "Versão Veiculo",
-                  margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                  placeholder: "Mercedes Benz Axor 2544",
-                ),
-                CustomTextField(
-                  onSaved: (value) => vehicleBrand = value!,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Campo Marca é obrigatório";
-                    }
-                    return null;
-                  },
-                  controller: _controllerVehicleBrand,
-                  labelText: "Marca do Veiculo",
-                  margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                  placeholder: "Mercedes",
-                ),
-                CustomDropdown(
-                  labelText: "Selecione a Condição do Veiculo",
-                  hintText: "Selecione a Condição do Veiculo",
-                  value: dropdownVehicleActive,
-                  onChanged: (Object? jobRole) {
-                    setState(() {
-                      dropdownVehicleActive = jobRole!.toString();
-                    });
-                    throw "";
-                  },
-                  items: vehicleActive.map((String vehicleActive) {
-                    return DropdownMenuItem(
-                      value: vehicleActive,
-                      child: Text(vehicleActive),
-                    );
-                  }).toList(),
-                ),
-                CustomTextField(
-                  onSaved: (value) => typeFuel = value!,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Campo Tipo de Combustivel é obrigatório";
-                    }
-                    return null;
-                  },
-                  controller: _controllerTypeFuel,
-                  labelText: "Tipo de Combustivel",
-                  margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                  placeholder: "Diesel",
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                CustomTextButton(
-                  buttonText: "Cadastrar",
-                  onPressed: () => save(context),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-              ],
-            ),
-          ],
+        appBar: CustomAppBarHome(
+          title: "Cadastro de Veiculo",
         ),
-      ),
-    );
+        body: Form(
+          key: formKey,
+          child: Row(
+            children: <Widget>[
+              Column(
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 15, 10, 30),
+                    child: ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => Home(),
+                          ));
+                        },
+                        icon: Icon(Icons.people_alt_outlined),
+                        label: Text("Colaboradores                 ")),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(10, 0, 10, 30),
+                    child: ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => VehicleRegistration(),
+                          ));
+                        },
+                        icon: Icon(Icons.fire_truck),
+                        label: Text("Cadastro de veiculo        ")),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(10, 0, 10, 30),
+                    child: ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => CollaboratorRegistration(),
+                          ));
+                        },
+                        icon: Icon(Icons.addchart_outlined),
+                        label: Text("Cadastro de Colaborador")),
+                  ),
+                ],
+              ),
+              const VerticalDivider(thickness: 1, width: 1),
+              Expanded(
+                  child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Cadastro de Veiculo",
+                          style: GoogleFonts.poppins(
+                            fontSize: 17,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 15, 15, 0),
+                    child: Divider(
+                      color: Color.fromARGB(255, 1224, 227, 231),
+                      indent: 15,
+                      endIndent: 15,
+                      thickness: 2,
+                      height: 2,
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(15, 15, 15, 15),
+                    width: MediaQuery.of(context).size.width,
+                    height: 500,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(7)),
+                      color: Color.fromARGB(255, 240, 240, 240),
+                    ),
+                    child: ListView(
+                      children: [
+                        Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
+                              child: TextFormField(
+                                onSaved: (value) => board = value!,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Campo placa é obrigatorio!";
+                                  }
+                                  return null;
+                                },
+                                maxLength: 8,
+                                textInputAction: TextInputAction.next,
+                                textCapitalization: TextCapitalization.words,
+                                controller: _controllerBoard,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  icon: const Icon(Icons.fire_truck_sharp),
+                                  hintText: "FRD-4486",
+                                  labelText: "Placa do Veiculo",
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
+                              child: TextFormField(
+                                onSaved: (value) => vehicleBrand = value!,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Campo Marca é obrigatório";
+                                  }
+                                  return null;
+                                },
+                                controller: _controllerVehicleBrand,
+                                maxLength: 20,
+                                textInputAction: TextInputAction.next,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  icon: const Icon(Icons.fire_truck_sharp),
+                                  hintText: "Mercedes",
+                                  labelText: "Marca do Veiculo",
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
+                              child: TextFormField(
+                                onSaved: (value) => vehicleModelo = value!,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Campo Modelo do Veiculo é obrigatório";
+                                  }
+                                  return null;
+                                },
+                                controller: _controllerVehicleModel,
+                                maxLength: 20,
+                                textInputAction: TextInputAction.next,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  icon: const Icon(Icons.developer_mode_sharp),
+                                  hintText: "Atego 3030",
+                                  labelText: "Modelo do Veiculo",
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
+                              child: TextFormField(
+                                onSaved: (value) => vehicleYear = value!,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Campo Ano do Veiculo é obrigatório";
+                                  }
+                                  return null;
+                                },
+                                controller: _controllerVehicleYear,
+                                maxLength: 4,
+                                textInputAction: TextInputAction.next,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  icon: const Icon(Icons.fire_truck_sharp),
+                                  hintText: "2012",
+                                  labelText: "Ano do Veiculo",
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
+                              child: TextFormField(
+                                onSaved: (value) => typeFuel = value!,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Campo Tipo de Combustivel é obrigatório";
+                                  }
+                                  return null;
+                                },
+                                controller: _controllerTypeFuel,
+                                maxLength: 10,
+                                textInputAction: TextInputAction.next,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  icon: const Icon(Icons.local_gas_station),
+                                  hintText: "Diesel",
+                                  labelText: "Tipo de Combustivel",
+                                ),
+                              ),
+                            ),
+                            CustomDropdownRegister(
+                              labelText: "Selecione a Situação do Veiculo",
+                              hintText: "Selecione a Situação do Veiculo",
+                              value: dropdownCondition,
+                              onChanged: (Object? Condition) {
+                                setState(() {
+                                  dropdownCondition = Condition!.toString();
+                                });
+                                throw "";
+                              },
+                              items: Condition.map((String Condition) {
+                                return DropdownMenuItem(
+                                  value: Condition,
+                                  child: Text(Condition),
+                                );
+                              }).toList(),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                              child: Center(
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    save(context);
+                                  },
+                                  child: Text("Cadastrar"),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ))
+            ],
+          ),
+        ));
   }
-  
-  final vehicleActiveSelected = TextEditingController();
-  List<String> vehicleActive = [
-    "Manutenção",
-    "Operação",
-  ];
 }
+
+final ConditionSelected = TextEditingController();
+List<String> Condition = [
+  "Operacional",
+  "Desativado",
+];

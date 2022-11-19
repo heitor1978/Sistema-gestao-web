@@ -184,13 +184,13 @@ class _CollaboratorRegistrationState extends State<CollaboratorRegistration> {
                               child: TextFormField(
                                 onSaved: (value) => cellphone = value!,
                                 controller: controller.cellphone,
-                                maxLength: 14,
+                                maxLength: 20,
                                 textInputAction: TextInputAction.next,
                                 validator: (value) =>
                                     UserValidator.validarTelefone(value!),
                                 inputFormatters: [
                                   FilteringTextInputFormatter.digitsOnly,
-                                  TelefoneInputFormatter(),
+                                  //TelefoneInputFormatter(),
                                 ],
                                 decoration: InputDecoration(
                                   filled: true,
@@ -262,7 +262,7 @@ class _CollaboratorRegistrationState extends State<CollaboratorRegistration> {
                               child: TextFormField(
                                 onSaved: (value) => password = value!,
                                 controller: controller.password,
-                                maxLength: 8,
+                                maxLength: 20,
                                 textInputAction: TextInputAction.next,
                                 validator: (value) =>
                                     UserValidator.validarSenha(value!),
@@ -285,7 +285,7 @@ class _CollaboratorRegistrationState extends State<CollaboratorRegistration> {
                                 obscureText: true,
                                 validator: (value) =>
                                     UserValidator.validarConfirmarSenha(
-                                        value!, controller.password!.text),
+                                        value!, controller.confirmPassword!.text),
                                 decoration: InputDecoration(
                                   filled: true,
                                   icon: const Icon(Icons.password),

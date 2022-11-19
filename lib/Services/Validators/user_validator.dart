@@ -1,7 +1,7 @@
 class UserValidator {
   static String? validarNome(String nome) {
     if (nome.isEmpty) return 'Nome é obrigatório';
-    if (nome.length < 4) return 'Nome inválido';
+    if (nome.length < 2) return 'Nome inválido';
 
     return null;
   }
@@ -20,7 +20,7 @@ class UserValidator {
 
   static String? validarTelefone(String telefone) {
     if (telefone.isEmpty) return 'Telefone obrigatório';
-    if (!(telefone.length == 15)) return 'Telefone inválido';
+    if (!(telefone.length == 11)) return 'Telefone inválido';
 
     return null;
   }
@@ -58,7 +58,7 @@ class UserValidator {
   }
 
   static String? validarLocalizacao(String localizacao) {
-    if (localizacao.isEmpty) return 'Latitude/Longitudee obrigatório'; 
+    if (localizacao.isEmpty) return 'Latitude/Longitude obrigatório'; 
 
     return null;
   }

@@ -19,7 +19,6 @@ class CollaboratorRegistration extends StatefulWidget {
       _CollaboratorRegistrationState();
 }
 
-
 class _CollaboratorRegistrationState extends State<CollaboratorRegistration> {
   final firestore = FirebaseFirestore.instance;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -32,11 +31,9 @@ class _CollaboratorRegistrationState extends State<CollaboratorRegistration> {
   String? password;
   String? confirmPassword;
 
-
   String? dropdownTypeCollaborator;
 
   CollaboratorControllerService controller = CollaboratorControllerService();
-
 
   AuthService auth = AuthService();
 
@@ -284,8 +281,8 @@ class _CollaboratorRegistrationState extends State<CollaboratorRegistration> {
                                 textInputAction: TextInputAction.next,
                                 obscureText: true,
                                 validator: (value) =>
-                                    UserValidator.validarConfirmarSenha(
-                                        value!, controller.confirmPassword!.text),
+                                    UserValidator.validarConfirmarSenha(value!,
+                                        controller.confirmPassword!.text),
                                 decoration: InputDecoration(
                                   filled: true,
                                   icon: const Icon(Icons.password),
@@ -293,18 +290,23 @@ class _CollaboratorRegistrationState extends State<CollaboratorRegistration> {
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                              child: Center(
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    save(context);
-                                    auth.logout(context);
-                                  },
-                                  child: Text("Cadastrar"),
-                                ),
-                              ),
-                            ),
+                            (isLoading)
+                                ? const Center(
+                                    child: CircularProgressIndicator(),
+                                  )
+                                : Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                    child: Center(
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          save(context);
+                                          auth.logout(context);
+                                        },
+                                        child: Text("Cadastrar"),
+                                      ),
+                                    ),
+                                  ),
                           ],
                         ),
                       ],

@@ -58,6 +58,7 @@ class _VehicleRegistrationState extends State<VehicleRegistration> {
     }
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomAppBarHome(

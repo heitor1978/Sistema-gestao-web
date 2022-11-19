@@ -23,7 +23,6 @@ class _VehicleActiveViewState extends State<VehicleActiveView> {
       extendBodyBehindAppBar: true,
       extendBody: true,
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
-      drawer: const CustomDrawer(),
       appBar: const CustomAppBarHome(
         title: "Lista de Veiculos",
       ),

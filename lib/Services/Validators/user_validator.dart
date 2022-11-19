@@ -20,7 +20,7 @@ class UserValidator {
 
   static String? validarTelefone(String telefone) {
     if (telefone.isEmpty) return 'Telefone obrigatório';
-    if (!(telefone.length == 11)) return 'Telefone inválido';
+    if (!(telefone.length == 15)) return 'Telefone inválido';
 
     return null;
   }

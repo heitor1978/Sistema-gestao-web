@@ -41,10 +41,11 @@ class _CollaboratorRegistrationState extends State<CollaboratorRegistration> {
   AuthService auth = AuthService();
 
   bool admin = false;
+  bool isLoading = false;
 
   void save(BuildContext context) async {
     if (formKey.currentState!.validate()) {
-      //setState(() => isLoading = true);
+      setState(() => isLoading = true);
       formKey.currentState!.save();
       try {
         if (dropdownTypeCollaborator == "Administrativo") {
@@ -65,13 +66,13 @@ class _CollaboratorRegistrationState extends State<CollaboratorRegistration> {
           context,
         );
       } on AuthException catch (e) {
-        //setState(() => isLoading = false);
+        setState(() => isLoading = false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(e.message)),
         );
       }
     } else {
-      //setState(() => isLoading = false);
+      setState(() => isLoading = false);
     }
   }
 
@@ -184,20 +185,19 @@ class _CollaboratorRegistrationState extends State<CollaboratorRegistration> {
                               child: TextFormField(
                                 onSaved: (value) => cellphone = value!,
                                 controller: controller.cellphone,
-                                maxLength: 20,
+                                maxLength: 19,
                                 textInputAction: TextInputAction.next,
                                 validator: (value) =>
                                     UserValidator.validarTelefone(value!),
                                 inputFormatters: [
                                   FilteringTextInputFormatter.digitsOnly,
-                                  //TelefoneInputFormatter(),
+                                  TelefoneInputFormatter(),
                                 ],
                                 decoration: InputDecoration(
                                   filled: true,
                                   icon: const Icon(Icons.phone),
                                   hintText: "Numero de Telefone",
                                   labelText: "Como podemos falar com ele?",
-                                  prefixText: '+55 ',
                                 ),
                               ),
                             ),

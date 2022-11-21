@@ -118,6 +118,15 @@ class _CollaboratorRegistrationState extends State<CollaboratorRegistration> {
                         icon: Icon(Icons.addchart_outlined),
                         label: Text("Cadastro de Colaborador")),
                   ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(10, 350, 10, 10),
+                    child: ElevatedButton.icon(
+                        onPressed: () {
+                          auth.logout(context);
+                        },
+                        icon: Icon(Icons.logout_outlined),
+                        label: Text("           Deslogar             ")),
+                  ),
                 ],
               ),
               const VerticalDivider(thickness: 1, width: 1),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gestao_web/Services/AuthService/auth_service.dart';
 import 'package:gestao_web/View/CollaboratorRegistration/collaborator_registration.dart';
 import 'package:gestao_web/View/VehicleRegistration/vehicle_registration.dart';
 import 'package:gestao_web/Widgets/AppBar/custom_appbar.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../CollaboratorActive/collaborator_active.dart';
 
 class Home extends StatefulWidget {
@@ -14,6 +14,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  AuthService auth = AuthService();
   NavigationRailLabelType labelType = NavigationRailLabelType.all;
   bool showLeading = false;
   bool showTrailing = false;
@@ -62,12 +63,20 @@ class _HomeState extends State<Home> {
                 child: ElevatedButton.icon(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>
-                            CollaboratorRegistration(),
+                        builder: (context) => CollaboratorRegistration(),
                       ));
                     },
                     icon: Icon(Icons.addchart_outlined),
                     label: Text("Cadastro de Colaborador")),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(10, 350, 10, 10),
+                child: ElevatedButton.icon(
+                    onPressed: () {
+                      auth.logout(context);
+                    },
+                    icon: Icon(Icons.logout_outlined),
+                    label: Text("           Deslogar             ")),
               ),
             ],
           ),

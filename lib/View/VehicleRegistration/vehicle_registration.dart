@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gestao_web/Services/AuthService/auth_service.dart';
 import 'package:gestao_web/View/CollaboratorRegistration/collaborator_registration.dart';
 import 'package:gestao_web/Widgets/Dropdown/custom_dropdown_web.dart';
 import 'package:gestao_web/Widgets/export_all_widget.dart';
@@ -18,6 +19,7 @@ class VehicleRegistration extends StatefulWidget {
 class _VehicleRegistrationState extends State<VehicleRegistration> {
   final firestore = FirebaseFirestore.instance;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  AuthService auth = AuthService();
 
   String? valueDropDownButtonType;
   String? valueDropDownButtonActive;
@@ -103,6 +105,15 @@ class _VehicleRegistrationState extends State<VehicleRegistration> {
                         },
                         icon: Icon(Icons.addchart_outlined),
                         label: Text("Cadastro de Colaborador")),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(10, 350, 10, 10),
+                    child: ElevatedButton.icon(
+                        onPressed: () {
+                          auth.logout(context);
+                        },
+                        icon: Icon(Icons.logout_outlined),
+                        label: Text("           Deslogar             ")),
                   ),
                 ],
               ),

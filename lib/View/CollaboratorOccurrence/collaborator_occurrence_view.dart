@@ -20,7 +20,14 @@ class _CollaboratorOccurrenceState extends State<CollaboratorOccurrence> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 240, 240, 240),
-        appBar: CustomAppBarHome(title: "Ocorrências dos Funcionários"),
+        appBar: CustomAppBarHome(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: Icon(Icons.keyboard_return_rounded)),
+          title: "Ocorrências dos Funcionários"
+        ),
         body: Row(children: <Widget>[
           Column(
             //mainAxisAlignment: MainAxisAlignment.spaceBetween,

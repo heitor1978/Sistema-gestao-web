@@ -42,8 +42,12 @@ class _CollaboratorRoutesState extends State<CollaboratorRoutes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CustomDrawer(),
       appBar: CustomAppBarHome(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: Icon(Icons.keyboard_return_rounded)),
         title: "Cadastro de Viagem",
       ),
       body: Form(

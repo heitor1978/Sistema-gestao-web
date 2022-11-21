@@ -14,27 +14,20 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _selectedIndex = 0;
   NavigationRailLabelType labelType = NavigationRailLabelType.all;
   bool showLeading = false;
   bool showTrailing = false;
   double groupAligment = -1.0;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final PageController _pageController = PageController();
-  int indexNavigatorBar = 0;
 
   String? valueDropDownButtonType;
   String? valueDropDownButtonActive;
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBarHome(
-        leading: IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: Icon(Icons.keyboard_return_rounded)),
         title: "Home",
       ),
       body: Row(

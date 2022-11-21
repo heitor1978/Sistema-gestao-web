@@ -19,7 +19,12 @@ class _VehicleActiveViewState extends State<VehicleActiveView> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 240, 240, 240),
-        appBar: const CustomAppBarHome(
+        appBar:  CustomAppBarHome(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: Icon(Icons.keyboard_return_rounded)),
           title: "Lista de Veiculos",
         ),
         body: Row(children: <Widget>[

@@ -5,12 +5,14 @@ import 'package:gestao_web/theme/theme.dart';
 class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final Icon? icon;
-  
+  Widget? leading;
 
-  const CustomAppBarHome({
+
+  CustomAppBarHome({
     Key? key,
     this.title,
     this.icon,
+    this.leading,
   }) : super(key: key);
 
   @override
@@ -46,24 +48,7 @@ class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
             statusBarBrightness: Brightness.light,
           ),
           backgroundColor: const Color.fromARGB(0, 255, 255, 255),
-          leading: Builder(
-            builder: (BuildContext context) {
-              return Container(
-                margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                /*child: IconButton(
-                  icon: const Icon(
-                    Icons.menu,
-                    color: Color.fromARGB(255, 240, 240, 240),
-                  ),
-                  onPressed: () {
-                    Scaffold.of(context).openDrawer();
-                  },
-                  tooltip:
-                      MaterialLocalizations.of(context).openAppDrawerTooltip,
-                ),*/
-              );
-            },
-          ),
+          leading: leading ?? null,
           /*actions: [
             Container(
               margin: const EdgeInsets.fromLTRB(0, 10, 10, 0),

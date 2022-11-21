@@ -20,7 +20,6 @@ class AdministrationCollaborator extends StatefulWidget {
 class _AdministrationCollaboratorState
     extends State<AdministrationCollaborator> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final PageController _pageController = PageController();
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
 

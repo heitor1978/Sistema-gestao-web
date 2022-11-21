@@ -5,6 +5,7 @@ import 'package:gestao_web/theme/theme.dart';
 class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final Icon? icon;
+  
 
   const CustomAppBarHome({
     Key? key,
@@ -49,7 +50,7 @@ class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
             builder: (BuildContext context) {
               return Container(
                 margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                child: IconButton(
+                /*child: IconButton(
                   icon: const Icon(
                     Icons.menu,
                     color: Color.fromARGB(255, 240, 240, 240),
@@ -59,7 +60,7 @@ class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
                   },
                   tooltip:
                       MaterialLocalizations.of(context).openAppDrawerTooltip,
-                ),
+                ),*/
               );
             },
           ),

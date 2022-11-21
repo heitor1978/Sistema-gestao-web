@@ -32,7 +32,7 @@ class CollaboratorChecklistContainer extends StatelessWidget {
                     }
                         return InkWell(
                           child: Container(
-                            margin: const EdgeInsets.fromLTRB(500, 15, 500, 10),
+                            margin: const EdgeInsets.fromLTRB(350, 15, 350, 10),
                             width: MediaQuery.of(context).size.width,
                             height: 70,
                             decoration: const BoxDecoration(

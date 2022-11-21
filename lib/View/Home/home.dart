@@ -30,6 +30,11 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBarHome(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: Icon(Icons.keyboard_return_rounded)),
         title: "Home",
       ),
       body: Row(
@@ -46,7 +51,7 @@ class _HomeState extends State<Home> {
                       ));
                     },
                     icon: Icon(Icons.people_alt_outlined),
-                    label: Text("Colaboradores             ")),
+                    label: Text("Colaboradores                 ")),
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(10, 0, 10, 30),

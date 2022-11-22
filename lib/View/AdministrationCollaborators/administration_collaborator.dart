@@ -151,7 +151,7 @@ class _AdministrationCollaboratorState
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(250, 15, 250, 15),
+                      padding: const EdgeInsets.fromLTRB(250, 15, 250, 0),
                       child: InkWell(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(

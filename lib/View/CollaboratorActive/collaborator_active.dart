@@ -39,51 +39,55 @@ class CollaboratorActive extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                         color: Color.fromARGB(255, 240, 240, 240),
                       ),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                            child: CircleAvatar(
-                              backgroundColor: Colors.grey,
-                              radius: 17,
+                      child: Container(
+                        color: Colors.white,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              child: CircleAvatar(
+                                backgroundColor: Colors.grey,
+                                radius: 17,
+                              ),
                             ),
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.7,
-                            padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  snapshot.data!.docs[index]['nome'],
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 17,
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                  child: Text(
-                                    snapshot.data!.docs[index]['telefone'],
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.7,
+                              padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    snapshot.data!.docs[index]['nome'],
                                     style: GoogleFonts.poppins(
                                       fontSize: 17,
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                  child: Text(
-                                    snapshot.data!.docs[index]['cpf'],
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 17,
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                    child: Text(
+                                      snapshot.data!.docs[index]['telefone'],
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 17,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                    child: Text(
+                                      snapshot.data!.docs[index]['cpf'],
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 17,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     onTap: () {

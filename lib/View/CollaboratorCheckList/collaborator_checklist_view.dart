@@ -3,6 +3,7 @@ import 'package:gestao_web/View/CollaboratorCheckList/collaborator_checklist_con
 import 'package:gestao_web/View/CollaboratorRegistration/collaborator_registration.dart';
 import 'package:gestao_web/Widgets/export_all_widget.dart';
 import 'package:gestao_web/View/export_all_view.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CollaboratorChecklistView extends StatefulWidget {
   final String? uid;
@@ -15,7 +16,6 @@ class CollaboratorChecklistView extends StatefulWidget {
 
 class _CollaboratorChecklistViewState extends State<CollaboratorChecklistView> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final PageController _pageController = PageController();
   int indexNavigatorBar = 0;
 
   @override
@@ -70,7 +70,52 @@ class _CollaboratorChecklistViewState extends State<CollaboratorChecklistView> {
         ),
         const VerticalDivider(thickness: 1, width: 1),
         Expanded(
-          child: CollaboratorChecklistContainer(uid: widget.uid),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+                child: Row(
+                  children: [
+                    Text(
+                      "Checklist do Motorista",
+                      style: GoogleFonts.poppins(fontSize: 17),
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                child: Divider(
+                  color: Color.fromARGB(255, 1224, 227, 231),
+                  indent: 15,
+                  endIndent: 15,
+                  thickness: 2,
+                  height: 2,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(80, 15, 150, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Checklist",
+                      style: GoogleFonts.poppins(
+                        fontSize: 17,
+                      ),
+                    ),
+                    Text(
+                      "Observação",
+                      style: GoogleFonts.poppins(
+                        fontSize: 17,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Expanded(child: CollaboratorChecklistContainer(uid: widget.uid)),
+            ],
+          ),
         )
       ]),
     );

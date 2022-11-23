@@ -255,7 +255,7 @@ class _CollaboratorRegistrationState extends State<CollaboratorRegistration> {
                                 });
                                 throw "";
                               },
-                              items: TypeCollaborator.map(
+                              items: typeCollaborator.map(
                                   (String TypeCollaborator) {
                                 return DropdownMenuItem(
                                   value: TypeCollaborator,
@@ -329,8 +329,8 @@ class _CollaboratorRegistrationState extends State<CollaboratorRegistration> {
   }
 }
 
-final ConditionSelected = TextEditingController();
-List<String> TypeCollaborator = [
+final conditionSelected = TextEditingController();
+List<String> typeCollaborator = [
   "Motorista",
   "Administrativo",
 ];

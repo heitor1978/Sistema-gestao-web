@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 
@@ -31,68 +32,60 @@ class CollaboratorOccurrenceContainer extends StatelessWidget {
                       return Text('Error: ${snapshot.error}');
                     }
                         return InkWell(
+                        child: Container(
+                          margin: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+                          width: MediaQuery.of(context).size.width,
+                          height: 50,
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                            color: Color.fromARGB(255, 240, 240, 240),
+                          ),
                           child: Container(
-                            margin: const EdgeInsets.fromLTRB(350, 15, 350, 10),
-                            width: MediaQuery.of(context).size.width,
-                            height: 70,
-                            decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color.fromARGB(25, 10, 10, 10),
-                                  spreadRadius: 5,
-                                  blurRadius: 7,
-                                  offset: Offset(0, 3),
-                                ),
-                              ],
-                              color: Color.fromARGB(255, 240, 240, 240),
-                            ),
+                            color: Colors.white,
                             child: Row(
                               children: [
-                                Column(
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                    ),
-                                  ],
-                                ),
                                 Padding(
                                   padding:
-                                      const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                      const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.grey,
+                                    radius: 17,
+                                  ),
+                                ),
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.7,
+                                  padding:
+                                      const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                                  child: Row(
+                                    //mainAxisAlignment:
+                                        //MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        snapshot.data!.docs[index].get('nomeOcorrencia'),
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
+                                        snapshot.data!.docs[index]['nomeOcorrencia'],
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 17,
                                         ),
                                       ),
-                                      Divider(
-                                        color: Colors.yellow,
-                                        height: 2,
-                                        endIndent: 0,
-                                        indent: 20,
-                                        thickness: 5,
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            350, 0, 0, 0),
+                                        child: Text(
+                                          snapshot.data!.docs[index]
+                                              ['registroOcorrencia'],
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 17,
+                                          ),
+                                        ),
                                       ),
-                                      Text(snapshot.data!.docs[index].get('registroOcorrencia')),
                                     ],
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          onTap: () {
-                    
-                          },
-                        );
+                        ),
+                      );
                     }
                 );
               },

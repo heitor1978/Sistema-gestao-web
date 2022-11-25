@@ -54,12 +54,12 @@ class _ScreenStartState extends State<ScreenStart> {
                   fontSize: 15,
                 ),
               ),
-              currentAccountPicture: Image.asset(
+              /*currentAccountPicture: Image.asset(
                 'assets/images/chiquinho-logo.png',
                 alignment: Alignment.center,
                 width: 100,
                 height: 100,
-              ),
+              ),*/  
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),

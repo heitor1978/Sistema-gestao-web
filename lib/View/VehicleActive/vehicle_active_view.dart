@@ -4,6 +4,7 @@ import 'package:gestao_web/View/VehicleActive/vehicle_active_container.dart';
 import 'package:gestao_web/Theme/theme.dart';
 import 'package:gestao_web/Widgets/export_all_widget.dart';
 import 'package:gestao_web/View/export_all_view.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 class VehicleActiveView extends StatefulWidget {
@@ -67,7 +68,59 @@ class _VehicleActiveViewState extends State<VehicleActiveView> {
             ],
           ),
           const VerticalDivider(thickness: 1, width: 1),
-          Expanded(child: VehicleActiveContainer(uid: widget.uid)),
+          Expanded(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Lista de Veiculos",
+                        style: GoogleFonts.poppins(fontSize: 17),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                  child: Divider(
+                    color: Color.fromARGB(255, 1224, 227, 231),
+                    indent: 15,
+                    endIndent: 15,
+                    thickness: 2,
+                    height: 2,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(80, 15, 150, 0),
+                  child: Row(
+                    //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Modelo",
+                        style: GoogleFonts.poppins(
+                          fontSize: 17,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(410, 0, 0, 0),
+                        child: Text(
+                          "Marca",
+                          style: GoogleFonts.poppins(
+                            fontSize: 17,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: VehicleActiveContainer(uid: widget.uid) ,
+                )
+              ],
+            ),
+          ),
         ]));
   }
 }

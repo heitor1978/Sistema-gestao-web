@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 
 class VehicleActiveContainer extends StatelessWidget {
-  VehicleActiveContainer({
-    super.key,
-    this.uid
-  });
+  VehicleActiveContainer({super.key, this.uid});
   final String? uid;
   final firestore = FirebaseFirestore.instance;
   var docs;
 
-  void save(String anoVeiculo, String marca, String placa, String tipoCombustivel, String versaoVeiculo, String uid, String uidVehicle) async {
-    firestore.collection('funcionarios').doc(uid).collection('veiculo').doc(uid).set({
+  void save(
+      String anoVeiculo,
+      String marca,
+      String placa,
+      String tipoCombustivel,
+      String versaoVeiculo,
+      String uid,
+      String uidVehicle) async {
+    firestore
+        .collection('funcionarios')
+        .doc(uid)
+        .collection('veiculo')
+        .doc(uid)
+        .set({
       "anoVeiculo": anoVeiculo,
       "marca": marca,
       "placa": placa,
@@ -22,8 +31,11 @@ class VehicleActiveContainer extends StatelessWidget {
     });
   }
 
- getAllVehicle(){
-    return firestore.collection('veiculos').where('veiculoAtivo', isEqualTo: true).snapshots();
+  getAllVehicle() {
+    return firestore
+        .collection('veiculos')
+        .where('veiculoAtivo', isEqualTo: true)
+        .snapshots();
   }
 
   @override
@@ -37,78 +49,79 @@ class VehicleActiveContainer extends StatelessWidget {
             child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
               stream: getAllVehicle(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if(!snapshot.hasData) return const CircularProgressIndicator();
+                if (!snapshot.hasData) return const CircularProgressIndicator();
                 return ListView.builder(
-                  itemCount: snapshot.data?.docs.length,
-                  itemBuilder: (_, index) {
-                    if(snapshot.hasError){
-                      return Text('Error: ${snapshot.error}');
-                    }
-                        return InkWell(
+                    itemCount: snapshot.data?.docs.length,
+                    itemBuilder: (_, index) {
+                      if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      }
+                      return InkWell(
                           child: Container(
-                            margin: const EdgeInsets.fromLTRB(350, 15, 350, 10),
+                            margin: const EdgeInsets.fromLTRB(15, 15, 15, 0),
                             width: MediaQuery.of(context).size.width,
-                            height: 70,
-                            decoration: const BoxDecoration(
+                            height: 50,
+                            /*decoration: const BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(15)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color.fromARGB(25, 10, 10, 10),
-                                  spreadRadius: 5,
-                                  blurRadius: 7,
-                                  offset: Offset(0, 3),
-                                ),
-                              ],
                               color: Color.fromARGB(255, 240, 240, 240),
-                            ),
-                            child: Row(
-                              children: [
-                                Column(
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
+                            ),*/
+                            child: Container(
+                              color: Colors.white,
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.grey,
+                                      radius: 17,
                                     ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        snapshot.data!.docs[index].get('versaoVeiculo'),
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                      Divider(
-                                        color: Colors.yellow,
-                                        height: 2,
-                                        endIndent: 0,
-                                        indent: 20,
-                                        thickness: 5,
-                                      ),
-                                      Text(snapshot.data!.docs[index].get('marca')),
-                                    ],
                                   ),
-                                ),
-                              ],
+                                  Container(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.7,
+                                    padding:
+                                        const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                                    child: Row(
+                                      // mainAxisAlignment:
+                                         // MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          snapshot.data!.docs[index]['versaoVeiculo'],
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 17,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              430, 0, 0, 0),
+                                          child: Text(
+                                            snapshot.data!.docs[index]['marca'],
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 17,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           onTap: () {
-                            save(snapshot.data!.docs[index].get('anoVeiculo'), snapshot.data!.docs[index].get('marca'), snapshot.data!.docs[index].get('placa'), snapshot.data!.docs[index].get('tipoCombustivel'), snapshot.data!.docs[index].get('versaoVeiculo'), uid!, snapshot.data!.docs[index].get('uid'));
-                          },
-                        );
-                    }
-                );
+                            save(
+                                snapshot.data!.docs[index].get('anoVeiculo'),
+                                snapshot.data!.docs[index].get('marca'),
+                                snapshot.data!.docs[index].get('placa'),
+                                snapshot.data!.docs[index]
+                                    .get('tipoCombustivel'),
+                                snapshot.data!.docs[index].get('versaoVeiculo'),
+                                uid!,
+                                snapshot.data!.docs[index].get('uid'));
+                          }); 
+                    });
               },
             ),
           ),

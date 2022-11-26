@@ -73,10 +73,10 @@ class VehicleActiveContainer extends StatelessWidget {
                                   Padding(
                                     padding:
                                         const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                    child: CircleAvatar(
+                                    /*child: CircleAvatar(
                                       backgroundColor: Colors.grey,
                                       radius: 17,
-                                    ),
+                                    ),*/
                                   ),
                                   Container(
                                     width:

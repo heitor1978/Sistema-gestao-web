@@ -93,12 +93,12 @@ class _CollaboratorOccurrenceState extends State<CollaboratorOccurrence> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(80, 15, 150, 0),
+                  padding: const EdgeInsets.fromLTRB(45, 15, 150, 0),
                   child: Row(
                     //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Ocorrencia",
+                        "Ocorrência",
                         style: GoogleFonts.poppins(
                           fontSize: 17,
                         ),

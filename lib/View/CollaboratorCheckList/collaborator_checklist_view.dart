@@ -94,9 +94,9 @@ class _CollaboratorChecklistViewState extends State<CollaboratorChecklistView> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(80, 15, 150, 0),
+                padding: const EdgeInsets.fromLTRB(45, 15, 150, 0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       "Checklist",
@@ -104,12 +104,14 @@ class _CollaboratorChecklistViewState extends State<CollaboratorChecklistView> {
                         fontSize: 17,
                       ),
                     ),
-                    Text(
-                      "Observação",
-                      style: GoogleFonts.poppins(
-                        fontSize: 17,
-                      ),
-                    )
+                    Padding(
+                        padding: const EdgeInsets.fromLTRB(720, 0, 0, 0),
+                        child: Text(
+                          "Observação",
+                          style: GoogleFonts.poppins(
+                            fontSize: 17,
+                          ),
+                        ))
                   ],
                 ),
               ),

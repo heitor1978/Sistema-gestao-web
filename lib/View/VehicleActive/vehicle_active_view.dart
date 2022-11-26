@@ -93,7 +93,7 @@ class _VehicleActiveViewState extends State<VehicleActiveView> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(80, 15, 150, 0),
+                  padding: const EdgeInsets.fromLTRB(45, 15, 150, 0),
                   child: Row(
                     //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

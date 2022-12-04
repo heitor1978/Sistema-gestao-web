@@ -53,36 +53,36 @@ class CollaboratorActive extends StatelessWidget {
                             Container(
                               width: MediaQuery.of(context).size.width * 0.7,
                               padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                              child: Table(
                                 children: [
-                                  Text(
-                                    snapshot.data!.docs[index]['nome'],
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 17,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                    child: Text(
-                                      snapshot.data!.docs[index]['telefone'],
+                                  TableRow(children: [
+                                    Text(
+                                      snapshot.data!.docs[index]['nome'],
                                       style: GoogleFonts.poppins(
                                         fontSize: 17,
                                       ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                    child: Text(
-                                      snapshot.data!.docs[index]['cpf'],
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 17,
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.fromLTRB(95, 0, 0, 0),
+                                      child: Text(
+                                        snapshot.data!.docs[index]['telefone'],
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 17,
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.fromLTRB(170, 0, 0, 0),
+                                      child: Text(
+                                        snapshot.data!.docs[index]['cpf'],
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 17,
+                                        ),
+                                      ),
+                                    ),
+                                  ])
                                 ],
                               ),
                             ),

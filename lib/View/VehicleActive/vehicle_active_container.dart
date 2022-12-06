@@ -85,10 +85,11 @@ class VehicleActiveContainer extends StatelessWidget {
                                         const EdgeInsets.fromLTRB(20, 0, 0, 0),
                                     child: Row(
                                       // mainAxisAlignment:
-                                         // MainAxisAlignment.spaceBetween,
+                                      // MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          snapshot.data!.docs[index]['versaoVeiculo'],
+                                          snapshot.data!.docs[index]
+                                              ['versaoVeiculo'],
                                           style: GoogleFonts.poppins(
                                             fontSize: 17,
                                           ),
@@ -120,7 +121,8 @@ class VehicleActiveContainer extends StatelessWidget {
                                 snapshot.data!.docs[index].get('versaoVeiculo'),
                                 uid!,
                                 snapshot.data!.docs[index].get('uid'));
-                          }); 
+                            Navigator.of(context).pop();
+                          });
                     });
               },
             ),

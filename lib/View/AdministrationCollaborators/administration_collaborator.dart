@@ -259,30 +259,41 @@ class _AdministrationCollaboratorState
                               margin: EdgeInsets.fromLTRB(250, 15, 250, 15),
                               height: 100,
                               child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Padding(
                                     padding:
-                                        const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                                        const EdgeInsets.fromLTRB(10, 0, 0, 0),
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Image.asset(
                                           "assets/images/check-box.png",
                                           width: 50,
                                           height: 50,
                                         ),
-                                        Padding(
+                                                                                Padding(
                                           padding: const EdgeInsets.fromLTRB(
                                               5, 0, 0, 0),
-                                          child: Text(
-                                            "Checkagem do Motorista",
-                                            style: GoogleFonts.poppins(),
-                                          ),
+                                          child: Column(
+                                          children: [
+                                            
+                                          ],
+                                        ),
                                         )
                                       ],
                                     ),
-                                  )
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                    child: Text(
+                                                "Checkagem Motorista",
+                                                style: GoogleFonts.poppins(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w600
+                                                ),
+                                              ),
+                                  ),
                                 ],
                               ),
                             ),

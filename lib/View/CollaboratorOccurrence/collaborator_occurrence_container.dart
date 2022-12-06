@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
-
 class CollaboratorOccurrenceContainer extends StatelessWidget {
   CollaboratorOccurrenceContainer({super.key, this.uid});
 
   final String? uid;
   final firestore = FirebaseFirestore.instance;
 
-  getAllOccurrence(){
-    return firestore.collection('funcionarios').doc(uid).collection('ocorrencia').snapshots();
+  getAllOccurrence() {
+    return firestore
+        .collection('funcionarios')
+        .doc(uid)
+        .collection('ocorrencia')
+        .snapshots();
   }
- 
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,14 +26,14 @@ class CollaboratorOccurrenceContainer extends StatelessWidget {
             child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
               stream: getAllOccurrence(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if(!snapshot.hasData) return const CircularProgressIndicator();
+                if (!snapshot.hasData) return const CircularProgressIndicator();
                 return ListView.builder(
-                  itemCount: snapshot.data?.docs.length,
-                  itemBuilder: (_, index) {
-                    if(snapshot.hasError){
-                      return Text('Error: ${snapshot.error}');
-                    }
-                        return InkWell(
+                    itemCount: snapshot.data?.docs.length,
+                    itemBuilder: (_, index) {
+                      if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      }
+                      return InkWell(
                         child: Container(
                           margin: const EdgeInsets.fromLTRB(15, 15, 15, 0),
                           width: MediaQuery.of(context).size.width,
@@ -57,27 +59,41 @@ class CollaboratorOccurrenceContainer extends StatelessWidget {
                                       MediaQuery.of(context).size.width * 0.7,
                                   padding:
                                       const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                                  child: Row(
-                                    //mainAxisAlignment:
-                                        //MainAxisAlignment.spaceBetween,
+                                  child: Table(
+                                    defaultVerticalAlignment:
+                                        TableCellVerticalAlignment.middle,
                                     children: [
-                                      Text(
-                                        snapshot.data!.docs[index]['nomeOcorrencia'],
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 17,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            350, 0, 0, 0),
-                                        child: Text(
+                                      TableRow(children: [
+                                        Text(
                                           snapshot.data!.docs[index]
-                                              ['registroOcorrencia'],
+                                              ['nomeOcorrencia'],
                                           style: GoogleFonts.poppins(
                                             fontSize: 17,
                                           ),
                                         ),
-                                      ),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              90, 0, 0, 0),
+                                          child: Text(
+                                            snapshot.data!.docs[index]
+                                                ['registroOcorrencia'],
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 17,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              210, 0, 0, 0),
+                                          child: Text(
+                                            snapshot.data!.docs[index]
+                                                ['datahora'],
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 17,
+                                            ),
+                                          ),
+                                        ),
+                                      ])
                                     ],
                                   ),
                                 ),
@@ -86,14 +102,12 @@ class CollaboratorOccurrenceContainer extends StatelessWidget {
                           ),
                         ),
                       );
-                    }
-                );
+                    });
               },
             ),
           ),
         ],
-      ) ,
+      ),
     );
   }
 }
-

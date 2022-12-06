@@ -285,6 +285,7 @@ class _VehicleRegistrationState extends State<VehicleRegistration> {
                                 child: ElevatedButton(
                                   onPressed: () {
                                     save(context);
+                                    Navigator.of(context).pop();
                                   },
                                   child: Text("Cadastrar"),
                                 ),

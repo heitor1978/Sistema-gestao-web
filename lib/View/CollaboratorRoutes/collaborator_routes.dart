@@ -185,6 +185,7 @@ class _CollaboratorRoutesState extends State<CollaboratorRoutes> {
                           buttonText: 'Cadastrar',
                           onPressed: () {
                             save(context);
+                            Navigator.of(context).pop();
                           }),
                     ],
                   ),
